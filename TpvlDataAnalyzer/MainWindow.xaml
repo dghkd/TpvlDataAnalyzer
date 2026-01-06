@@ -1,0 +1,153 @@
+﻿<Window x:Class="TpvlDataAnalyzer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:TpvlDataAnalyzer"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:view="clr-namespace:TpvlDataAnalyzer.View"
+        xmlns:viewbv="clr-namespace:TpvlDataAnalyzer.View.Behavior"
+        xmlns:vm="clr-namespace:TpvlDataAnalyzer.ViewModel"
+        mc:Ignorable="d"
+        Title="MainWindow"
+        Width="1110"
+        Height="735"
+        d:DataContext="{d:DesignInstance vm:MainVM}"
+        WindowStartupLocation="CenterScreen">
+
+    <!--  Root  -->
+    <Grid Margin="5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="480" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <!--  Control Side  -->
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <!--  Source URL  -->
+            <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                <TextBlock Text="Source URL:" />
+                <TextBox Width="300"
+                         Margin="5,0,0,0"
+                         Text="{Binding SourceUrl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <Button Width="75"
+                        Margin="5,0,0,0"
+                        Command="{Binding CmdLoadData}"
+                        Content="讀取" />
+            </StackPanel>
+
+            <!--  Sort Buttons  -->
+            <StackPanel Grid.Row="1"
+                        Margin="2,5,2,5"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Orientation="Horizontal">
+                <StackPanel.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Width" Value="85" />
+                        <Setter Property="Height" Value="24" />
+                        <Setter Property="Margin" Value="2" />
+                    </Style>
+                </StackPanel.Resources>
+                <StackPanel Orientation="Vertical">
+                    <Button Command="{Binding CmdSortByServesErrorCount}" Content="發球失誤數" />
+                    <Button Command="{Binding CmdSortBySpikesErrorCount}" Content="攻擊失誤數" />
+                    <Button Command="{Binding CmdSortBySetsErrorCount}" Content="舉球失誤數" />
+                    <TextBlock Text=" " />
+                    <Button Command="{Binding CmdSortByBlocksErrorCount}" Content="攔網失誤數" />
+                    <Button Command="{Binding CmdSortByPassesErrorCount}" Content="接發失誤數" />
+                    <Button Command="{Binding CmdSortByDefensesErrorCount}" Content="防守失誤數" />
+                    <TextBlock Text=" " />
+                    <Button Command="{Binding CmdSortByServesErrorRate}" Content="發球失誤率" />
+                    <Button Command="{Binding CmdSortBySpikesErrorRate}" Content="攻擊失誤率" />
+                    <Button Command="{Binding CmdSortBySetsErrorRate}" Content="舉球失誤率" />
+                    <TextBlock Text=" " />
+                    <Button Command="{Binding CmdSortByBlocksErrorRate}" Content="攔網失誤率" />
+                    <Button Command="{Binding CmdSortByPassesErrorRate}" Content="接發失誤率" />
+                    <Button Command="{Binding CmdSortByDefensesErrorRate}" Content="防守失誤率" />
+                </StackPanel>
+                <StackPanel Margin="5,0,0,0" Orientation="Vertical">
+                    <Button Command="{Binding CmdSortByServesCompleteCount}" Content="發球成功數" />
+                    <Button Command="{Binding CmdSortBySpikesCompleteCount}" Content="攻擊成功數" />
+                    <Button Command="{Binding CmdSortBySetsCompleteCount}" Content="舉球成功數" />
+                    <TextBlock Text=" " />
+                    <Button Command="{Binding CmdSortByBlocksCompleteCount}" Content="攔網成功數" />
+                    <Button Command="{Binding CmdSortByPassesCompleteCount}" Content="接發成功數" />
+                    <Button Command="{Binding CmdSortByDefensesCompleteCount}" Content="防守成功數" />
+                    <TextBlock Text=" " />
+                    <Button Command="{Binding CmdSortByServesCompleteRate}" Content="發球成功率" />
+                    <Button Command="{Binding CmdSortBySpikesCompleteRate}" Content="攻擊成功率" />
+                    <Button Command="{Binding CmdSortBySetsCompleteRate}" Content="舉球成功率" />
+                    <TextBlock Text=" " />
+                    <Button Command="{Binding CmdSortByBlocksCompleteRate}" Content="攔網成功率" />
+                    <Button Command="{Binding CmdSortByPassesCompleteRate}" Content="接發成功率" />
+                    <Button Command="{Binding CmdSortByDefensesCompleteRate}" Content="防守成功率" />
+                </StackPanel>
+                <StackPanel Margin="5,0,0,0" Orientation="Vertical">
+                </StackPanel>
+                <StackPanel Margin="5,0,0,0" Orientation="Vertical">
+                    <Button Command="{Binding CmdSortByServesTotal}" Content="發球總數" />
+                    <Button Command="{Binding CmdSortBySpikesTotal}" Content="攻擊總數" />
+                    <Button Command="{Binding CmdSortBySetsTotal}" Content="舉球總數" />
+                    <TextBlock Text=" " />
+                    <Button Command="{Binding CmdSortByBlocksTotal}" Content="攔網總數" />
+                    <Button Command="{Binding CmdSortByPassesTotal}" Content="接發總數" />
+                    <Button Command="{Binding CmdSortByDefensesTotal}" Content="防守總數" />
+                    <TextBlock Text=" " />
+                    <Button Command="{Binding CmdSortByAvgScorePerRound}" Content="平均得分" />
+                    <Button Command="{Binding CmdSortByAvgSpikesPerRound}" Content="平均攻擊" />
+                </StackPanel>
+                <StackPanel Margin="5,0,0,0" Orientation="Vertical">
+                    <Button Command="{Binding CmdSortByCompleteCount}" Content="總和成功數" />
+                    <Button Command="{Binding CmdSOrtByErrorCount}" Content="總和失誤數" />
+                    <!--<Button Command="{Binding CmdSortByAttackTotal}" Content="進攻總數" />
+                    <Button Command="{Binding CmdSortByAttackErrorCount}" Content="進攻失誤數" />
+                    <Button Command="{Binding CmdSortByAttackCompleteCount}" Content="進攻成功數" />
+                    <TextBlock Text=" " />
+                    <Button Command="{Binding CmdSortByResistanceTotal}" Content="防禦總數" />
+                    <Button Command="{Binding CmdSortByResistanceErrorCount}" Content="防禦失誤數" />
+                    <Button Command="{Binding CmdSortByResistanceCompleteCount}" Content="防禦成功數" />
+                    <TextBlock Text=" " />
+                    <Button Command="{Binding CmdSortByAttackErrorRate}" Content="進攻失誤率" />
+                    <Button Command="{Binding CmdSortByAttackCompleteRate}" Content="進攻成功率" />
+                    <Button Command="{Binding CmdSortByResistanceErrorRate}" Content="防禦失誤率" />
+                    <Button Command="{Binding CmdSortByResistanceCompleteRate}" Content="防禦成功率" />-->
+                </StackPanel>
+                <StackPanel Margin="5,0,0,0" Orientation="Vertical">
+                    <Button Command="{Binding CmdSortByScore}" Content="總得分" />
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+
+        <!--  Data Side  -->
+        <Grid Grid.Column="1">
+            <TextBlock Margin="110,2,10,0"
+                       VerticalAlignment="Top"
+                       Text="T=Total, A=Attempt, S=Success, E=Error" />
+            <Button Width="85"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Command="{Binding CmdShowPlayerFilterDialog}"
+                    Content="篩選器" />
+
+            <!--  Content  -->
+            <Grid Margin="0,20,0,0">
+                <ListView ItemsSource="{Binding PlayersColle}">
+                    <behaviors:Interaction.Behaviors>
+                        <viewbv:SmoothScrollBehavior />
+                    </behaviors:Interaction.Behaviors>
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <view:PlayerInfoItem>
+                            </view:PlayerInfoItem>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

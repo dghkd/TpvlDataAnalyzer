@@ -1,0 +1,110 @@
+﻿<Window x:Class="TpvlDataAnalyzer.View.PlayerFilterDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:TpvlDataAnalyzer.View"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:TpvlDataAnalyzer.ViewModel"
+        mc:Ignorable="d"
+        Title="篩選器"
+        Width="520"
+        Height="670"
+        d:DataContext="{d:DesignInstance vm:PlayerFilterDialogVM}"
+        WindowStartupLocation="CenterOwner">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="MinWidth" Value="77" />
+            <Setter Property="MinHeight" Value="25" />
+            <Setter Property="Margin" Value="5" />
+        </Style>
+    </Window.Resources>
+
+    <!--  Root  -->
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="120" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <!--  Filter Button  -->
+        <StackPanel Orientation="Vertical">
+            <!--  Select All / Clear / Reverse -->
+            <StackPanel Orientation="Horizontal">
+                <Button Command="{Binding CmdSelectAllPlayers}" Content="全選" />
+                <Button Command="{Binding CmdClearAllPlayers}" Content="清除" />
+                <Button Command="{Binding CmdReverseSelection}" Content="反向選取" />
+                <CheckBox Margin="5,0"
+                          VerticalAlignment="Center"
+                          Content="在目前結果中篩選"
+                          FontSize="14"
+                          IsChecked="{Binding IsFilterOnCurrent}" />
+            </StackPanel>
+
+            <!--  Select By Squad  -->
+            <StackPanel Margin="0,1" Orientation="Horizontal">
+                <TextBlock VerticalAlignment="Center" Text="隊伍：" />
+                <ItemsControl ItemsSource="{Binding SquadNameColle}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel IsItemsHost="True" Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button Command="{Binding DataContext.CmdSelectBySquadName, RelativeSource={RelativeSource AncestorType=Window}}"
+                                    CommandParameter="{Binding}"
+                                    Content="{Binding}" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+
+            <!--  Select By Position  -->
+            <StackPanel Margin="0,1" Orientation="Horizontal">
+                <TextBlock VerticalAlignment="Center" Text="位置：" />
+                <ItemsControl ItemsSource="{Binding PositionColle}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel IsItemsHost="True" Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button Command="{Binding DataContext.CmdSelectByPosition, RelativeSource={RelativeSource AncestorType=Window}}"
+                                    CommandParameter="{Binding}"
+                                    Content="{Binding}" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </StackPanel>
+
+        <!--  Player List  -->
+        <ScrollViewer Grid.Row="1">
+            <ItemsControl MinHeight="100"
+                          Margin="0,5"
+                          ItemsSource="{Binding GroupColle}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel IsItemsHost="True" Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <ItemsControl ItemsSource="{Binding PlayersColle}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel MinWidth="110" Orientation="Horizontal">
+                                        <CheckBox Margin="3"
+                                                  Content="{Binding Name}"
+                                                  FontSize="16"
+                                                  IsChecked="{Binding IsFilterSelected}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</Window>
