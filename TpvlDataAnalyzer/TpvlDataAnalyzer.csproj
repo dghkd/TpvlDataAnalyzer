@@ -6,12 +6,38 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <Company>dghkd</Company>
+    <Authors>dghkd</Authors>
+    <FileVersion>1.0.0.0107</FileVersion>
+    <RepositoryUrl>https://github.com/dghkd/TpvlDataAnalyzer</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/dghkd/TpvlDataAnalyzer</PackageProjectUrl>
+    <Copyright>Copyright ©  2026  dghkd.  All Rights Reserved</Copyright>
+    <ApplicationIcon>TPVLDataAnalyzer.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Resource Include="TPVLDataAnalyzer.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
 
 </Project>

@@ -9,10 +9,11 @@
         xmlns:viewbv="clr-namespace:TpvlDataAnalyzer.View.Behavior"
         xmlns:vm="clr-namespace:TpvlDataAnalyzer.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow"
+        Title="TPVL Data Analyzer"
         Width="1110"
         Height="735"
         d:DataContext="{d:DesignInstance vm:MainVM}"
+        Icon="/TPVLDataAnalyzer.ico"
         WindowStartupLocation="CenterScreen">
 
     <!--  Root  -->
