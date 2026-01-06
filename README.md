@@ -14,3 +14,7 @@
 2. 從HTML內容中解析出"__NEXT_DATA__"的Json資料
 3. 從Json資料解析出球員數據
 4. 計算數據並排序球員列表
+
+## 開發環境
+1. Visual Studio Community 2022 版本 17.14.4
+2. WPF .Net 8.0 
